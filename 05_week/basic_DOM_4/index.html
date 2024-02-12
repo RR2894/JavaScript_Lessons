@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pancake Maker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="image-container">
+        <img src="pancake.jpeg" alt="Delicious pancakes" />
+        <div class="price-banner"><span id="totalPrice">$5</span></div>
+      </div>
+      <div class="form-container">
+        <h2>Customize Your Pancake</h2>
+        <div class="customization-section">
+          <label for="type">Choose your pancake type:</label>
+          <select id="type">
+            <option value="5">Classic - $5</option>
+            <option value="6">Chocolate - $6</option>
+            <option value="7">Blueberry - $7</option>
+          </select>
+        </div>
+        <div class="customization-section">
+          <p>Select your toppings ($1 each):</p>
+          <div>
+          <label for="nuts">Nuts</label>
+          <input type="checkbox" id="nuts" value="1" data-name="Nuts" data-category="toppings"/>
+          <br />
+          </div>
+        
+          <div>
+          <label for="bananas">Bananas</label>
+          <input type="checkbox" id="bananas" value="1" data-name="Bananas" data-category="toppings"/>
+          <br />
+        </div>
+        <div>
+          <label for="syrup">Syrup</label>
+          <input type="checkbox" id="syrup" value="1" data-name="Syrup" data-category="toppings"/>
+          <br />
+        </div>
+        <div class="customization-section">
+          <p>Add extras:</p>
+          <div>
+          <label for="whippedCream"></label>
+          <input type="checkbox" id="whippedCream" value="2" data-name="Whipped cream" data-category="extras"/>Whipped Cream -
+          $2
+          </div>
+          <br/>
+          <div>
+          <label for="iceCream"></label>
+          <input type="checkbox" id="iceCream" value="3" data-name="Ice Cream" data-category="extras"/>Ice Cream - $3
+          <br/>
+        </div>
+        <div>
+        <h3>Your details</h3>
+        
+        <div>
+          <label for="yourName">Your name</label>
+          <input type="text" id="customerName" value=" " />
+        </div>
+        <button>Make order</button>
+      </div>  
+        <div class="order">
+          <p>Type: <span id="order_type"></span></p>
+          <p>Toppings: <span id="order_toppings"></span></p>
+          <p>Extras: <span id="order_extras"></span></p>
+          <p>Name: <span id="order_name"></span></p>
+          <p>Order Price: <span id="order_price"></span></p>
+        </div>
+        <!-- <div class="price-display">
+          <h3>Total Price: <span id="totalPrice">$5</span></h3>
+        </div>
+      </div> -->
+    </div>
+        </div>
+    <script src="script.js"></script>
+  </body>
+</html>

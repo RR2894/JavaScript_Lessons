@@ -3,10 +3,10 @@
 let evenCount = 0;
 
 for (numbers = 0; numbers < 20; numbers++) {
-  let data = Number(prompt("Input 20 numbers!"));
+  let data = Number(prompt('Input 20 numbers!'));
   if (data % 2 == 0) {
     evenCount++;
   }
-} 
+}
 
-console.log(evenCount)
+console.log(evenCount);

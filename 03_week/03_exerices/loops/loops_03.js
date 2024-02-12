@@ -4,11 +4,11 @@ let distance;
 let time;
 
 while (distance != 0) {
-  distance = Number(prompt("input distance"));
+  distance = Number(prompt('input distance'));
 
   if (distance == 0) break;
 
-  time = Number(prompt("input number"));
+  time = Number(prompt('input number'));
   let medianSpeed = distance / time;
   console.log(medianSpeed);
 }
