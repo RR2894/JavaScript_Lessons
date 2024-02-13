@@ -7,7 +7,5 @@ function fahrenheitToCelsius(fahrenheit) {
   return answer.toFixed(1);
 }
 
-console.log(answer);
-
 // Sample usage - do not modify
 console.log(fahrenheitToCelsius(21)); // "-6,1"

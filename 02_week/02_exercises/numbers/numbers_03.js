@@ -9,3 +9,21 @@
 - Use console.log() to print 'roundedNum1', 'roundedNum2', 'sqrtNum1', and 'maxNum' to the console.
 - Use the typeof operator to check the data type of each new variable and print the result using console.log().
 */
+
+let num1 = 5543.23;
+let num2 = 6274.45;
+
+let roundedNum1 = Math.round(num1);
+let roundedNum2 = Math.round(num2);
+
+let sqrtNum1 = Math.sqrt(roundedNum1);
+let sqrtNum2 = Math.sqrt(roundedNum2);
+
+let maxNum = Math.max(roundedNum1, roundedNum2);
+
+console.log(roundedNum1, roundedNum2, sqrtNum1, sqrtNum2, maxNum);
+
+console.log(typeof roundedNum1);
+console.log(typeof roundedNum2);
+console.log(typeof sqrtNum1);
+console.log(typeof sqrtNum2);
