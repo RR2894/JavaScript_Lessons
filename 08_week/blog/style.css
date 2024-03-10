@@ -1,0 +1,17 @@
+body {
+    background-color: salmon;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+#postContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#postContainer div {
+    background-color: white;
+    border-radius: 5px;
+    color: #333;
+    padding: 1rem;
+}
