@@ -1,0 +1,33 @@
+body {
+    background-color: lightgray;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+}
+
+h1 {
+    text-align: center;
+}
+
+#pokemonContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#data {
+    width: 600px;
+    border: 1px dashed black;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+#logo {
+    max-width: 25%;
+    max-height: 25%;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: block;
+    border-radius: 1000px;
+}
