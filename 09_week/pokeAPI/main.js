@@ -1,58 +1,79 @@
-fetchKantoPokemon();
+let pokemons = [];
 
-
-function fetchKantoPokemon() {
-  fetch('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
+const fetchData = () => {
+  fetch('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0')
     .then((response) => response.json())
-    .then(function (allpokemon) {
-      allpokemon.results.forEach(function (pokemon) {
-        fetchPokemonData(pokemon);
+    .then((json) => {
+      const fetches = json.results.map((item) => {
+        return fetch(item.url).then((res) => res.json());
       });
-    });
-}
 
-function fetchPokemonData(pokemon) {
-  let url = pokemon.url;
-  fetch(url)
-    .then((response) => response.json())
-    .then(function (pokeData) {
-      displayPokemon(pokeData);
-    });
-}
-
-function displayPokemon(pokeData) {
-  const pokemonContainer = document.getElementById('pokemonContainer');
-
-  const pokemonName = document.createElement('h2');
-  pokemonName.textContent = pokeData.name;
-
-  const pokemonImage = document.createElement('img');
-  pokemonImage.src = pokeData.sprites.front_default;
-  pokemonImage.alt = pokeData.name;
-
-  pokemonContainer.appendChild(pokemonName);
-  pokemonContainer.appendChild(pokemonImage);
-}
-
-
-function fetchImage() {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=151', {
-      method: 'GET',
-      headers: {
-        "x-rapidapi-host": "pokeapi.co/api/v2/pokemon?limit=151"
-      }
+      Promise.all(fetches).then((data) => {
+        pokemons = data;
+        displayData(pokemons);
+        console.log(pokemons);
+      });
     })
-      .then(response => response.blob())
-      .then(data => {
-      })
-      .catch(error => console.error(error));
-  }
+    .catch((error) => console.error('Error fetching data:', error));
+};
 
-  const postContainer = document.getElementById('postContainer');
-  const button = document.createElement('button');
-  button.textContent = 'Get a pokemon';
-  button.addEventListener('click', () => {
-    pokedex();
+fetchData();
+
+const displayData = (data) => {
+  const container = document.querySelector('.data');
+  container.innerHTML = '';
+
+  data.forEach((pokemon) => {
+    const pokemonCard = document.createElement('div');
+    const imageUrl =
+      pokemon.sprites.other.dream_world.front_default ??
+      pokemon.sprites.other['official-artwork'].front_default ??
+      'assets/placeholder-image-url.webp';
+
+      const isFavorite = localStorage.getItem(pokemon.name) === 'true';
+      const favoriteText = isFavorite ? 'Unmakr favorite' : 'Mark favorite';
+
+    pokemonCard.innerHTML = `<h2>${pokemon.name}</h2>
+
+
+    <img src="${imageUrl}"/>
+    <div class="card">
+      <p>Weight: ${pokemon.weight / 10} kg</p>
+      <p>Height: ${pokemon.height / 10} m</p>
+    </div>
+    <button id="favButton" data-name=${pokemon.name}>${favoriteText}</button>
+    `;
+    container.appendChild(pokemonCard);
   });
+};
 
-  postContainer.appendChild(button);
+const toggleFavorite = (e) => {
+  const pokemonName = e.target.getAttribute('data-name');
+  console.log(pokemonName);
+}
+
+const addFavorites = () => {
+  document.querySelectorAll('#favButton').forEach(button => button.addEventListener('click', toggleFavorite));
+}
+
+const debounce = (func, delay) => {
+  let debounceTimer;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+  };
+};
+
+const searchPokemons = debounce((searchInput) => {
+  console.log('search triggered');
+  const filteredData = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
+  displayData(filteredData);
+}, 300);
+
+document.querySelector('#search').addEventListener('input', (e) => {
+  searchPokemons(e.target.value);
+});
