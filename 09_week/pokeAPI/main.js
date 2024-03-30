@@ -30,31 +30,37 @@ const displayData = (data) => {
       pokemon.sprites.other['official-artwork'].front_default ??
       'assets/placeholder-image-url.webp';
 
-      const isFavorite = localStorage.getItem(pokemon.name) === 'true';
-      const favoriteText = isFavorite ? 'Unmakr favorite' : 'Mark favorite';
+    const isFavorite = localStorage.getItem(pokemon.name) === 'true';
+    const favoriteText = isFavorite ? 'Unmark favorite' : 'Mark favorite';
 
     pokemonCard.innerHTML = `<h2>${pokemon.name}</h2>
-
-
     <img src="${imageUrl}"/>
     <div class="card">
       <p>Weight: ${pokemon.weight / 10} kg</p>
       <p>Height: ${pokemon.height / 10} m</p>
     </div>
-    <button id="favButton" data-name=${pokemon.name}>${favoriteText}</button>
+    <button id="favButton" data-name=${pokemon.name}> ${favoriteText}</button>
     `;
     container.appendChild(pokemonCard);
   });
+  addFavorites();
 };
 
 const toggleFavorite = (e) => {
   const pokemonName = e.target.getAttribute('data-name');
-  console.log(pokemonName);
-}
+  const isFavorite = localStorage.getItem(pokemonName) === 'true';
+  localStorage.setItem(pokemonName, !isFavorite);
+  displayData(pokemons);
+  let displayFavorites = JSON.parse(localStorage.getItem('pokemons') || defaultValue);
+  return displayFavorites;
+
+};
 
 const addFavorites = () => {
-  document.querySelectorAll('#favButton').forEach(button => button.addEventListener('click', toggleFavorite));
-}
+  document
+    .querySelectorAll('#favButton')
+    .forEach((button) => button.addEventListener('click', toggleFavorite));
+};
 
 const debounce = (func, delay) => {
   let debounceTimer;
